@@ -61,52 +61,66 @@ export async function PUT(
             notes || reason || 'Điều chỉnh theo thỏa thuận đôi bên'
           );
 
+          const icsContent = generateICalendar({
+            title: `LuxeEstate: Xem Căn Hộ ${updated.propertyTitle} (Lịch Mới)`,
+            description: `Cuộc hẹn tham quan căn hộ ${updated.propertyTitle} đã được cập nhật sang thời gian mới: ${date} lúc ${time}. Hotline hỗ trợ: (+84) 28 8888 9999. ${notes ? `Ghi chú: ${notes}` : ''}`,
+            location: updated.propertyLocation,
+            date: date,
+            time: time,
+            durationMinutes: 60,
+          });
+
           await sendEmail({
             to: currentViewing.customerEmail,
-            subject: `[LuxeEstate] Thông Báo Điều Chỉnh Lịch Hẹn — ${currentViewing.propertyTitle}`,
+            subject: `[LuxeEstate] Thông Báo Điều Chỉnh Lịch Hẹn — ${currentViewing.propertyTitle} (${date} lúc ${time})`,
             html: emailHtml,
+            icsContent,
+            icsFileName: `LuxeEstate-LichMoi-${date}.ics`,
           });
         } catch (mailErr) {
           console.error('Failed to send reschedule email:', mailErr);
         }
       }
     } else if (status) {
-      updated = updateViewingStatus(id, status, notes);
+      updated = updateViewingStatus(id, status, notes, date, time);
 
       // Gửi email khi Admin Confirm (Xác nhận lịch)
       if (updated && status === 'Confirmed' && currentViewing.customerEmail) {
         try {
-          // Tạo file .ics iCalendar
+          const finalDate = updated.date || date || currentViewing.date || new Date().toISOString().slice(0, 10);
+          const finalTime = updated.time || time || currentViewing.time || '14:00';
+
+          // Tạo file .ics iCalendar với ngày giờ chính xác vừa chốt
           const icsContent = generateICalendar({
-            title: `LuxeEstate: Xem Căn Hộ ${currentViewing.propertyTitle}`,
-            description: `Cuộc hẹn tham quan thực tế căn hộ ${currentViewing.propertyTitle} cùng chuyên viên LuxeEstate Concierge. Quý khách vui lòng có mặt đúng giờ. Hotline hỗ trợ: (+84) 28 8888 9999.`,
-            location: currentViewing.propertyLocation,
-            date: currentViewing.date,
-            time: currentViewing.time,
+            title: `LuxeEstate: Xem Căn Hộ ${updated.propertyTitle}`,
+            description: `Cuộc hẹn tham quan thực tế căn hộ ${updated.propertyTitle} cùng chuyên viên LuxeEstate Concierge. Quý khách vui lòng có mặt đúng giờ. Hotline hỗ trợ: (+84) 28 8888 9999. ${notes ? `Ghi chú: ${notes}` : ''}`,
+            location: updated.propertyLocation,
+            date: finalDate,
+            time: finalTime,
             durationMinutes: 60,
           });
 
           const emailHtml = renderCustomerConfirmationEmail(
             {
-              customerName: currentViewing.customerName,
-              customerPhone: currentViewing.customerPhone,
-              customerEmail: currentViewing.customerEmail,
-              date: currentViewing.date,
-              time: currentViewing.time,
+              customerName: updated.customerName,
+              customerPhone: updated.customerPhone,
+              customerEmail: updated.customerEmail,
+              date: finalDate,
+              time: finalTime,
             },
             {
-              title: currentViewing.propertyTitle,
-              location: currentViewing.propertyLocation,
-              monthlyRent: currentViewing.propertyRent,
+              title: updated.propertyTitle,
+              location: updated.propertyLocation,
+              monthlyRent: updated.propertyRent,
             }
           );
 
           await sendEmail({
             to: currentViewing.customerEmail,
-            subject: `[LuxeEstate] Xác Nhận Lịch Hẹn Xem Nhà: ${currentViewing.propertyTitle}`,
+            subject: `[LuxeEstate] Xác Nhận Lịch Hẹn Xem Nhà: ${updated.propertyTitle} (${finalDate} lúc ${finalTime})`,
             html: emailHtml,
             icsContent,
-            icsFileName: `LuxeEstate-LichHen-${currentViewing.date}.ics`,
+            icsFileName: `LuxeEstate-LichHen-${finalDate}.ics`,
           });
         } catch (mailErr) {
           console.error('Failed to send confirmation email:', mailErr);

@@ -418,13 +418,21 @@ export function getViewingById(id: string): ViewingRequest | undefined {
   return adminStore.viewings.find((v) => v.id === id);
 }
 
-export function updateViewingStatus(id: string, status: ViewingStatus, notes?: string): ViewingRequest | null {
+export function updateViewingStatus(
+  id: string,
+  status: ViewingStatus,
+  notes?: string,
+  appointmentDate?: string,
+  appointmentTime?: string
+): ViewingRequest | null {
   const idx = adminStore.viewings.findIndex((v) => v.id === id);
   if (idx === -1) return null;
   adminStore.viewings[idx] = {
     ...adminStore.viewings[idx],
     status,
     notes: notes !== undefined ? notes : adminStore.viewings[idx].notes,
+    date: appointmentDate !== undefined && appointmentDate !== '' ? appointmentDate : adminStore.viewings[idx].date,
+    time: appointmentTime !== undefined && appointmentTime !== '' ? appointmentTime : adminStore.viewings[idx].time,
     updatedAt: new Date().toISOString(),
   };
 

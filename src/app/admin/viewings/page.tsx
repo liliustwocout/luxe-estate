@@ -208,13 +208,12 @@ export default function AdminViewingsPage() {
                     <td className="py-4 px-6 text-right">
                       <div className="flex items-center justify-end gap-1.5">
                         {v.status === 'Pending' && (
-                          <button
-                            type="button"
-                            onClick={() => handleUpdateStatus(v.id, 'Confirmed')}
-                            className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg text-[11px] font-semibold border border-emerald-200 transition-colors"
+                          <Link
+                            href={`/admin/viewings/${v.id}`}
+                            className="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-800 rounded-lg text-[11px] font-semibold border border-amber-200 transition-colors"
                           >
-                            Xác Nhận
-                          </button>
+                            Xếp Giờ & Duyệt →
+                          </Link>
                         )}
                         {v.status === 'Confirmed' && (
                           <button
