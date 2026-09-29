@@ -13,10 +13,48 @@ export default function AdminSettingsPage() {
 
   const [saved, setSaved] = useState(false);
 
+  // Email testing state
+  const [testEmailTarget, setTestEmailTarget] = useState('admin@luxeestate.vn');
+  const [sendingTest, setSendingTest] = useState(false);
+  const [testResult, setTestResult] = useState<{ success: boolean; message: string } | null>(null);
+
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
+  };
+
+  const handleSendTestEmail = async () => {
+    if (!testEmailTarget) return;
+    setSendingTest(true);
+    setTestResult(null);
+
+    try {
+      const res = await fetch('/api/admin/test-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ targetEmail: testEmailTarget }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setTestResult({
+          success: true,
+          message: data.message || 'Email thử nghiệm đã được kích hoạt thành công!',
+        });
+      } else {
+        setTestResult({
+          success: false,
+          message: data.error || 'Không thể gửi email kiểm tra.',
+        });
+      }
+    } catch (err: any) {
+      setTestResult({
+        success: false,
+        message: err.message || 'Lỗi mạng khi kết nối tới máy chủ.',
+      });
+    } finally {
+      setSendingTest(false);
+    }
   };
 
   return (
@@ -143,6 +181,73 @@ export default function AdminSettingsPage() {
                 </span>
               </div>
             </label>
+          </div>
+        </div>
+
+        {/* Email Integration & Testing */}
+        <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#E8E8E5] shadow-sm space-y-5">
+          <div className="flex items-center justify-between border-b border-[#E8E8E5] pb-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#111111]">
+              3. Kênh Gửi Email Tự Động (Email Automation Channel)
+            </h3>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#C9A96E]/15 text-[#C9A96E]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] animate-pulse"></span>
+              Resend / Universal Engine
+            </span>
+          </div>
+
+          <div className="bg-[#F7F7F5] p-4 rounded-2xl border border-[#E8E8E5] text-xs space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[#6B6B6B]">Trạng thái kết nối:</span>
+              <span className="font-semibold text-emerald-600 flex items-center gap-1">
+                ✓ Sẵn sàng kích hoạt (Multi-Provider Support)
+              </span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-[#6B6B6B]">Đơn vị cung cấp (Provider):</span>
+              <span className="font-mono text-[#111111] font-medium">Resend API / SMTP / Simulator</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-[#6B6B6B]">Email Admin nhận lịch:</span>
+              <span className="font-mono text-[#111111]">{email}</span>
+            </div>
+          </div>
+
+          {/* Test email sender */}
+          <div className="pt-2 border-t border-[#E8E8E5]/70 space-y-3">
+            <label className="block text-xs font-semibold text-[#111111] uppercase tracking-wider">
+              Gửi Email Thử Nghiệm (Send Test Email)
+            </label>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                placeholder="Nhập email của bạn để nhận thử"
+                value={testEmailTarget}
+                onChange={(e) => setTestEmailTarget(e.target.value)}
+                className="flex-1 px-4 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#E8E8E5] text-xs text-[#111111] focus:outline-none focus:border-[#111111]"
+              />
+              <button
+                type="button"
+                onClick={handleSendTestEmail}
+                disabled={sendingTest}
+                className="px-5 py-2.5 bg-[#C9A96E] hover:bg-[#b5955a] text-black font-bold text-xs rounded-xl transition-all shadow-sm disabled:opacity-50 whitespace-nowrap"
+              >
+                {sendingTest ? 'Đang gửi...' : 'Gửi Thử Ngay →'}
+              </button>
+            </div>
+
+            {testResult && (
+              <div
+                className={`p-3.5 rounded-xl text-xs flex items-start gap-2 ${
+                  testResult.success
+                    ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                    : 'bg-red-50 text-red-800 border border-red-200'
+                }`}
+              >
+                <span className="font-bold">{testResult.success ? '✓' : '✕'}</span>
+                <div>{testResult.message}</div>
+              </div>
+            )}
           </div>
         </div>
 
