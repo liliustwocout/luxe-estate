@@ -26,6 +26,7 @@ Tài liệu được chia thành 7 chuyên đề bài bản và chuyên sâu:
 | **05** | [**05_USER_GUIDE.md**](./05_USER_GUIDE.md) | Sổ tay vận hành: Hướng dẫn trải nghiệm khách hàng và quy trình vận hành chi tiết cho Quản trị viên (Duyệt lịch, Calendar, BĐS, Khách hàng). | End-Users, Operations, Support |
 | **06** | [**06_DEPLOYMENT_DEVOPS.md**](./06_DEPLOYMENT_DEVOPS.md) | Hướng dẫn triển khai Vercel Production, quy trình CI/CD GitHub, kịch bản kiểm thử tự động Playwright và giám sát hiệu năng. | DevOps, SRE, QA Engineers |
 | **07** | [**07_DEVELOPMENT_ONBOARDING.md**](./07_DEVELOPMENT_ONBOARDING.md) | Cẩm nang Onboarding lập trình viên: Cài đặt môi trường, quy chuẩn code React 19/Next.js 16, cấu trúc thư mục, hệ thống State & Song ngữ. | Lập trình viên mới, Developers |
+| **08** | [**08_FUTURE_ROADMAP.md**](./08_FUTURE_ROADMAP.md) | Lộ trình phát triển tiếp theo: Email tự động & Calendar sync, chuyển đổi PostgreSQL/Cloudinary, phân quyền RBAC môi giới, quản lý hợp đồng thuê, Virtual Tour 360°. | Toàn bộ Stakeholders, Architects, Developers |
 
 ---
 
