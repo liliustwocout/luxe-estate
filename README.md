@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LuxeEstate — Luxury Real Estate Rental Platform
 
-## Getting Started
+> Nền tảng tuyển chọn biệt thự, penthouse và căn hộ cho thuê thượng lưu tại Việt Nam.
 
-First, run the development server:
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://luxury-estate-self.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js_16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![Three.js](https://img.shields.io/badge/Three.js-WebGL-black?style=for-the-badge&logo=three.js)](https://threejs.org/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+
+---
+
+## 🌟 Tính Năng Nổi Bật (Key Features)
+
+- **Định Hướng Cho Thuê Cao Cấp (100% Rental Focused)**:
+  - Giá thuê minh bạch theo tháng (`$ / month` và quy đổi `~Triệu / tháng`).
+  - Thông số chi tiết: Tầng, diện tích, phòng ngủ, phòng tắm, tiền đặt cọc (*Security Deposit*), thời điểm dọn vào (*Available From*), thời hạn hợp đồng (*Lease Term*).
+  - Tình trạng nội thất: *Fully Furnished*, *Semi-Furnished*, *Unfurnished*.
+  - Quy trình xem nhà riêng tư (*Schedule a Viewing*).
+- **Trải Nghiệm Thị Giác & 3D Interactive**:
+  - **Three.js 3D Background**: Các khối kiến trúc lơ lửng, lăng kính thủy tinh và hạt bụi vàng kim tương tác theo chuột và độ cuộn trang.
+  - **Cinematic Hero**: Typography nghệ thuật cỡ lớn với hiệu ứng masked staggered reveal.
+  - **Featured Residences Showcase**: Trượt ngang với bộ đếm `01 / 06`, thẻ tương tác 3D tilt và zoom ảnh cinematic.
+  - **Magnetic Custom Cursor**: Vòng hào quang tự động nhận diện và tương tác các thành phần clickable (tự động tắt trên thiết bị cảm ứng).
+  - **Smooth Scroll**: Trải nghiệm cuộn mượt mà với Lenis.
+  - **Bilingual (Song Ngữ)**: Chuyển đổi mượt mà giữa Tiếng Việt (VI) và English (EN).
+- **Bộ Lọc Đa Tiêu Chí (Advanced Rental Filters)**:
+  - Vị trí (*Hà Nội, TP. Hồ Chí Minh, Đà Nẵng, Quảng Ninh*).
+  - Loại hình BĐS (*Căn hộ, Biệt thự ven sông, Penthouse, Duplex, Studio Loft*).
+  - **Slider khoảng giá thuê theo tháng** ($500 — $3,500+ / tháng).
+  - Số phòng ngủ, tình trạng nội thất và tình trạng phòng trống.
+
+---
+
+## 🛠️ Công Nghệ Sử Dụng (Tech Stack)
+
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router, React 19)
+- **3D & WebGL**: [Three.js](https://threejs.org/)
+- **Animation**: [Framer Motion](https://www.framer.com/motion/)
+- **Smooth Scrolling**: [Lenis](https://lenis.darkroom.engineering/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Typography**: Playfair Display (Serif) & Inter (Sans-serif)
+- **Deployment**: [Vercel](https://vercel.com/)
+
+---
+
+## 🚀 Khởi Chạy Dự Án (Getting Started)
+
+Cài đặt các gói phụ thuộc:
+
+```bash
+npm install
+```
+
+Khởi chạy môi trường phát triển cục bộ:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Mở trình duyệt tại [http://localhost:3000](http://localhost:3000) để trải nghiệm.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Kiểm tra build production:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🌐 Production Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Dự án hiện đã được triển khai trực tiếp trên Vercel:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Official URL**: [https://luxury-estate-self.vercel.app](https://luxury-estate-self.vercel.app)
+- **Repository**: [https://github.com/liliustwocout/luxe-estate](https://github.com/liliustwocout/luxe-estate)
