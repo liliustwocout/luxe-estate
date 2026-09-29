@@ -1,10 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function Footer() {
+  const pathname = usePathname();
   const { language, t } = useLanguage();
+
+  if (pathname?.startsWith('/admin')) return null;
 
   const exploreLinks = [
     { label: language === 'vi' ? 'Tất cả bất động sản' : 'All Properties', href: '/properties' },

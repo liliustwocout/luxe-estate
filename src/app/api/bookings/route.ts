@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { addViewingFromCustomer } from '@/lib/admin-data';
 
 // Simple in-memory rate limiting
 const rateLimit = new Map<string, { count: number; lastReset: number }>();
@@ -146,21 +147,24 @@ export async function POST(request: NextRequest) {
         console.error('Failed to send email:', emailError);
         // Don't fail the request if email fails
       }
-    } else {
-      console.log('Email not configured. Booking received:', {
-        propertyTitle,
-        customerName,
-        phone,
-        email,
-        date: date || 'Arrange directly',
-        time: time || 'Arrange directly',
-        message,
-      });
     }
+
+    // Save viewing request to Admin store
+    const newViewing = addViewingFromCustomer({
+      propertyId: propertyId || '',
+      propertyTitle: propertyTitle || 'Luxe Residence',
+      customerName,
+      phone,
+      email,
+      date,
+      time,
+      message,
+    });
 
     return NextResponse.json({
       success: true,
       message: 'Viewing request submitted successfully.',
+      viewingId: newViewing.id,
     });
   } catch (error) {
     console.error('Booking API error:', error);

@@ -40,6 +40,8 @@ export default function Navbar() {
     { href: '/contact', label: t.nav.contact[language] },
   ];
 
+  if (pathname?.startsWith('/admin')) return null;
+
   return (
     <>
       <motion.header

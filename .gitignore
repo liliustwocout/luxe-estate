@@ -43,3 +43,5 @@ next-env.d.ts
 # screenshots
 /*.png
 /public/test-screenshots/
+
+.vercel

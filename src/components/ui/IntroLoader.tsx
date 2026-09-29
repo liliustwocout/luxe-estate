@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function IntroLoader() {
+  const pathname = usePathname();
   const [loading, setLoading] = useState(true);
   const [step, setStep] = useState('01');
 
@@ -36,6 +38,8 @@ export default function IntroLoader() {
       clearTimeout(t3);
     };
   }, []);
+
+  if (pathname?.startsWith('/admin')) return null;
 
   return (
     <AnimatePresence>

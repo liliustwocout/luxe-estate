@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
 
 export default function CustomCursor() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(true);
@@ -53,7 +55,7 @@ export default function CustomCursor() {
     };
   }, [cursorX, cursorY, visible]);
 
-  if (isMobile || !visible) return null;
+  if (pathname?.startsWith('/admin') || isMobile || !visible) return null;
 
   return (
     <>
