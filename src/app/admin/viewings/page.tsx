@@ -188,10 +188,16 @@ export default function AdminViewingsPage() {
                       <div className="text-[11px] text-[#6B6B6B]">{v.propertyLocation}</div>
                     </td>
                     <td className="py-4 px-6">
-                      <div className="font-medium text-[#111111]">
-                        {v.date}
-                      </div>
-                      <div className="text-[11px] text-[#C9A96E] font-semibold">{v.time}</div>
+                      {v.date ? (
+                        <>
+                          <div className="font-medium text-[#111111]">{v.date}</div>
+                          {v.time && <div className="text-[11px] text-[#C9A96E] font-semibold">{v.time}</div>}
+                        </>
+                      ) : (
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-amber-50 text-amber-800 border border-amber-200">
+                          Chờ liên hệ xếp lịch
+                        </span>
+                      )}
                     </td>
                     <td className="py-4 px-6">
                       <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold border ${getStatusBadge(v.status)}`}>

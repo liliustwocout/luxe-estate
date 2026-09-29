@@ -139,13 +139,18 @@ export function renderAdminNewBookingEmail(booking: BookingInfo, property: Prope
         <td style="padding: 8px 0; border-bottom: 1px dashed ${BORDER_COLOR}; color: ${TEXT_MUTED};">Email Khách:</td>
         <td style="padding: 8px 0; border-bottom: 1px dashed ${BORDER_COLOR}; color: ${BRAND_DARK};">${booking.customerEmail || '—'}</td>
       </tr>
+      ${booking.date && booking.time ? `
       <tr>
         <td style="padding: 8px 0; border-bottom: 1px dashed ${BORDER_COLOR}; color: ${TEXT_MUTED};">Thời Gian Hẹn:</td>
         <td style="padding: 8px 0; border-bottom: 1px dashed ${BORDER_COLOR}; font-weight: 700; color: #16A34A;">${booking.date} lúc ${booking.time}</td>
-      </tr>
+      </tr>` : `
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px dashed ${BORDER_COLOR}; color: ${TEXT_MUTED};">Thời Gian:</td>
+        <td style="padding: 8px 0; border-bottom: 1px dashed ${BORDER_COLOR}; color: #C9A96E; font-weight: 600;">Chuyên viên liên hệ trực tiếp để sắp xếp thời gian đón tiếp</td>
+      </tr>`}
       ${booking.message ? `
       <tr>
-        <td style="padding: 8px 0; color: ${TEXT_MUTED};">Lời Nhắn:</td>
+        <td style="padding: 8px 0; color: ${TEXT_MUTED};">Lời Nhắn / Yêu Cầu:</td>
         <td style="padding: 8px 0; color: ${BRAND_DARK}; font-style: italic;">"${booking.message}"</td>
       </tr>` : ''}
     </table>

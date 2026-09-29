@@ -137,17 +137,32 @@ export default function ViewingDetailPage({
         {/* Workflow Actions */}
         <div className="flex flex-wrap items-center gap-2">
           {viewing.status === 'Pending' && (
-            <button
-              type="button"
-              disabled={updating}
-              onClick={() => handleUpdateStatus('Confirmed')}
-              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl transition-all shadow-sm flex items-center gap-1.5"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-              </svg>
-              <span>Xác Nhận (Confirm)</span>
-            </button>
+            <>
+              {(!viewing.date || !viewing.time) ? (
+                <button
+                  type="button"
+                  onClick={() => setShowReschedule(true)}
+                  className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold rounded-xl transition-all shadow-sm flex items-center gap-1.5"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span>Ấn Định Ngày Giờ & Xác Nhận</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  disabled={updating}
+                  onClick={() => handleUpdateStatus('Confirmed')}
+                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl transition-all shadow-sm flex items-center gap-1.5"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Xác Nhận (Confirm)</span>
+                </button>
+              )}
+            </>
           )}
 
           {viewing.status === 'Confirmed' && (
@@ -169,7 +184,7 @@ export default function ViewingDetailPage({
             onClick={() => setShowReschedule(!showReschedule)}
             className="px-3.5 py-2 bg-white hover:bg-[#F7F7F5] text-charcoal border border-[#E8E8E5] text-xs font-semibold rounded-xl transition-colors shadow-sm"
           >
-            Đổi Lịch (Reschedule)
+            {viewing.date ? 'Đổi Lịch (Reschedule)' : 'Đặt Lịch Hẹn'}
           </button>
 
           {viewing.status !== 'Cancelled' && viewing.status !== 'Completed' && (
@@ -326,12 +341,16 @@ export default function ViewingDetailPage({
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
           <div className="p-4 bg-[#F7F7F5] rounded-2xl border border-[#E8E8E5]">
             <span className="text-[10px] text-[#6B6B6B] uppercase font-semibold block mb-1">Ngày Hẹn Gặp</span>
-            <span className="font-display font-bold text-base text-[#111111]">{viewing.date}</span>
+            <span className="font-display font-bold text-base text-[#111111]">
+              {viewing.date || 'Chờ liên hệ xếp lịch'}
+            </span>
           </div>
 
           <div className="p-4 bg-[#F7F7F5] rounded-2xl border border-[#E8E8E5]">
             <span className="text-[10px] text-[#6B6B6B] uppercase font-semibold block mb-1">Khung Giờ Đón Tiếp</span>
-            <span className="font-display font-bold text-base text-[#C9A96E]">{viewing.time}</span>
+            <span className="font-display font-bold text-base text-[#C9A96E]">
+              {viewing.time || 'Chưa ấn định'}
+            </span>
           </div>
 
           <div className="p-4 bg-[#F7F7F5] rounded-2xl border border-[#E8E8E5]">

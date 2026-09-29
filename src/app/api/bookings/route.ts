@@ -52,15 +52,15 @@ export async function POST(request: NextRequest) {
     // Format date for display
     const formattedDate = date || 'Thỏa thuận trực tiếp';
 
-    // Save viewing request to Admin store
+    // Save viewing request to Admin store (Không tự sinh ngày giờ giả lập)
     const newViewing = addViewingFromCustomer({
       propertyId: propertyId || '',
       propertyTitle: propertyTitle || 'Luxe Residence',
       customerName,
       phone,
       email,
-      date: date || new Date().toISOString().slice(0, 10),
-      time: time || '14:00',
+      date: date || '',
+      time: time || '',
       message,
     });
 
@@ -73,8 +73,8 @@ export async function POST(request: NextRequest) {
           customerName,
           customerPhone: phone,
           customerEmail: email,
-          date: newViewing.date,
-          time: newViewing.time,
+          date: date || '',
+          time: time || '',
           message,
         },
         {
