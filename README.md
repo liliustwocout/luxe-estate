@@ -29,16 +29,38 @@
   - **Slider khoảng giá thuê theo tháng** ($500 — $3,500+ / tháng).
   - Số phòng ngủ, tình trạng nội thất và tình trạng phòng trống.
 
+- **Quản Trị Viên Tập Trung (Decoupled High-Speed Admin Portal)**:
+  - **Dashboard 4 KPI**: Tổng BĐS, Căn hộ trống (Available), Lịch xem nhà (Viewing Requests), Chờ duyệt (Pending).
+  - **Quản lý Bất Động Sản**: CRUD, bộ lọc tìm kiếm, công tắc Publish/Unpublish, chuyển đổi trạng thái Available/Rented, form 6 mục chuẩn hóa, chọn cover image.
+  - **Quản lý Lịch Xem Nhà**: Flow chuẩn hóa (Pending → Confirmed → Completed / Cancelled), màn hình chi tiết với đầy đủ action (Confirm, Reschedule, Cancel, Complete).
+  - **Lịch Tháng (Calendar View)**: Lưới lịch tháng trực quan với badge số lượng lịch hẹn và panel chi tiết theo giờ.
+  - **Quản lý Khách Hàng**: Danh bạ khách hàng, hồ sơ và Viewing History Timeline chi tiết.
+  - **Chuông thông báo (🔔 3)** & Cài đặt hệ thống.
+
+---
+
+## 📚 Tài Liệu Kỹ Thuật Hệ Thống (Comprehensive Documentation)
+
+Hệ thống được tài liệu hóa bài bản và chuyên sâu theo chuẩn Enterprise tại thư mục [`docs/`](./docs/README.md):
+
+1. [**01_ARCHITECTURE.md**](./docs/01_ARCHITECTURE.md) — Kiến trúc tổng thể, mô hình C4, nguyên tắc Decoupling giữa Customer Web và Admin.
+2. [**02_REQUIREMENTS_SPEC.md**](./docs/02_REQUIREMENTS_SPEC.md) — Đặc tả yêu cầu phần mềm (SRS), phân tích phạm vi 100% cho thuê cao cấp.
+3. [**03_API_REFERENCE.md**](./docs/03_API_REFERENCE.md) — Đặc tả toàn bộ RESTful API (Bookings, Properties, Viewings, Customers, Notifications).
+4. [**04_DATABASE_SCHEMA.md**](./docs/04_DATABASE_SCHEMA.md) — Thiết kế CSDL quan hệ, sơ đồ ERD, DDL Script PostgreSQL & Prisma schema.
+5. [**05_USER_GUIDE.md**](./docs/05_USER_GUIDE.md) — Sổ tay vận hành: Hướng dẫn trải nghiệm cho khách và cẩm nang vận hành cho Admin.
+6. [**06_DEPLOYMENT_DEVOPS.md**](./docs/06_DEPLOYMENT_DEVOPS.md) — Triển khai Vercel, quy trình CI/CD GitHub & kiểm thử tự động Playwright.
+7. [**07_DEVELOPMENT_ONBOARDING.md**](./docs/07_DEVELOPMENT_ONBOARDING.md) — Hướng dẫn Onboarding lập trình viên mới & quy chuẩn React 19/Next.js 16.
+
 ---
 
 ## 🛠️ Công Nghệ Sử Dụng (Tech Stack)
 
-- **Framework**: [Next.js 16](https://nextjs.org/) (App Router, React 19)
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router, React 19, Turbopack)
 - **3D & WebGL**: [Three.js](https://threejs.org/)
 - **Animation**: [Framer Motion](https://www.framer.com/motion/)
 - **Smooth Scrolling**: [Lenis](https://lenis.darkroom.engineering/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Typography**: Playfair Display (Serif) & Inter (Sans-serif)
+- **E2E Testing**: [Playwright](https://playwright.dev/)
 - **Deployment**: [Vercel](https://vercel.com/)
 
 ---
@@ -57,13 +79,9 @@ Khởi chạy môi trường phát triển cục bộ:
 npm run dev
 ```
 
-Mở trình duyệt tại [http://localhost:3000](http://localhost:3000) để trải nghiệm.
-
-Kiểm tra build production:
-
-```bash
-npm run build
-```
+Mở trình duyệt tại:
+- **Customer Portal**: [http://localhost:3000](http://localhost:3000)
+- **Admin Portal**: [http://localhost:3000/admin/login](http://localhost:3000/admin/login) *(Tài khoản: `admin@luxeestate.vn` / `admin123`)*
 
 ---
 
@@ -71,5 +89,7 @@ npm run build
 
 Dự án hiện đã được triển khai trực tiếp trên Vercel:
 
-- **Official URL**: [https://luxury-estate-self.vercel.app](https://luxury-estate-self.vercel.app)
-- **Repository**: [https://github.com/liliustwocout/luxe-estate](https://github.com/liliustwocout/luxe-estate)
+- **Official Customer Portal**: [https://luxury-estate-self.vercel.app](https://luxury-estate-self.vercel.app)
+- **Official Admin Portal**: [https://luxury-estate-self.vercel.app/admin/login](https://luxury-estate-self.vercel.app/admin/login)
+- **GitHub Repository**: [https://github.com/liliustwocout/luxe-estate](https://github.com/liliustwocout/luxe-estate)
+
