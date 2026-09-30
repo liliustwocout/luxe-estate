@@ -146,6 +146,60 @@ export const translations = {
       en: 'Schedule Viewing',
     },
   },
+  displayMode: {
+    label: {
+      vi: 'Chế độ hiển thị',
+      en: 'Display Mode',
+    },
+    liteTitle: {
+      vi: 'Tối Giản',
+      en: 'Lite Mode',
+    },
+    liteShort: {
+      vi: 'Tối giản',
+      en: 'Lite',
+    },
+    liteSubtitle: {
+      vi: 'Siêu mượt · 0% Lag · Tiết kiệm pin',
+      en: 'Ultra Smooth · Zero Lag · Eco',
+    },
+    liteBadge: {
+      vi: 'Mượt mà',
+      en: 'Smooth',
+    },
+    liteDesc: {
+      vi: 'Tắt 3D Three.js và giải phóng GPU, giúp tải trang nhanh và cuộn mượt không lag.',
+      en: 'Disables 3D WebGL to free GPU resources for instant speed and zero lag.',
+    },
+    ultraTitle: {
+      vi: '3D Siêu Đẹp',
+      en: 'Ultra 3D',
+    },
+    ultraShort: {
+      vi: '3D Siêu đẹp',
+      en: 'Ultra 3D',
+    },
+    ultraSubtitle: {
+      vi: 'Full hiệu năng · Kiến trúc sống động',
+      en: 'Full Fidelity · Dynamic Architecture',
+    },
+    ultraBadge: {
+      vi: 'Đồ họa cao',
+      en: 'High Fidelity',
+    },
+    ultraDesc: {
+      vi: 'Kích hoạt không gian 3D tương tác, wireframe kiến trúc và bụi vàng kim chuyển động.',
+      en: 'Enables interactive 3D space, architectural wireframes, and floating golden dust.',
+    },
+    toastSwitchedToLite: {
+      vi: '⚡ Đã chuyển sang chế độ Tối giản — Siêu nhẹ & mượt mà!',
+      en: '⚡ Switched to Lite Mode — Ultra smooth & zero lag!',
+    },
+    toastSwitchedToUltra: {
+      vi: '✨ Đã kích hoạt chế độ 3D Siêu đẹp — Đầy đủ hiệu ứng sống động!',
+      en: '✨ Activated Ultra 3D Mode — Full architectural WebGL!',
+    },
+  },
   hero: {
     badge: {
       vi: 'NỀN TẢNG CHO THUÊ BẤT ĐỘNG SẢN CAO CẤP 2026',

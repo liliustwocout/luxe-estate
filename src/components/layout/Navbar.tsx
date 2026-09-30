@@ -6,10 +6,13 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { easeOutExpo } from '@/components/ui/animations';
 import { useLanguage } from '@/context/LanguageContext';
+import { useDisplayMode } from '@/context/DisplayModeContext';
+import DisplayModeToggle from '@/components/ui/DisplayModeToggle';
 
 export default function Navbar() {
   const pathname = usePathname();
   const { language, setLanguage, t } = useLanguage();
+  const { mode, toggleMode } = useDisplayMode();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const isHome = pathname === '/';
@@ -86,6 +89,12 @@ export default function Navbar() {
                 />
               </Link>
             ))}
+
+            {/* 3D Graphics / Lite Performance Mode Toggle */}
+            <DisplayModeToggle
+              variant="navbar"
+              isLightNav={!showSolid && isHome}
+            />
 
             {/* Language Switcher Pill */}
             <div
@@ -181,8 +190,24 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Right: Language Switcher + Hamburger */}
-          <div className="flex items-center gap-3 md:hidden relative z-50">
+          {/* Mobile Right: 3D Mode Toggle + Language Switcher + Hamburger */}
+          <div className="flex items-center gap-2 md:hidden relative z-50">
+            {/* Quick 3D / Lite Toggle for Mobile */}
+            <button
+              type="button"
+              onClick={toggleMode}
+              className="w-8 h-8 flex items-center justify-center rounded-full border text-xs transition-colors shrink-0 shadow-sm"
+              style={{
+                borderColor: !showSolid && isHome ? 'rgba(255, 255, 255, 0.3)' : 'rgba(17, 17, 17, 0.12)',
+                backgroundColor: !showSolid && isHome ? 'rgba(0, 0, 0, 0.25)' : 'rgba(239, 239, 233, 0.8)',
+                color: !showSolid && isHome ? '#ffffff' : 'var(--color-primary)',
+              }}
+              title={mode === 'ultra' ? 'Đang bật 3D - Bấm để chuyển sang Tối giản (0% Lag)' : 'Đang bật Tối giản - Bấm để bật 3D'}
+              aria-label="Chuyển chế độ 3D / Tối giản"
+            >
+              <span className="text-xs">{mode === 'ultra' ? '✨' : '⚡'}</span>
+            </button>
+
             {/* Compact language switch for mobile */}
             <div
               className="flex items-center p-0.5 rounded-full border text-xs"
@@ -311,6 +336,16 @@ export default function Navbar() {
                     English (EN)
                   </button>
                 </div>
+              </motion.div>
+
+              {/* 3D Mode in Mobile Drawer */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.28, duration: 0.4, ease: easeOutExpo }}
+                className="w-full"
+              >
+                <DisplayModeToggle variant="drawer" />
               </motion.div>
 
               <motion.div

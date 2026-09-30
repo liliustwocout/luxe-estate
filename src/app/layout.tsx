@@ -4,9 +4,11 @@ import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { LanguageProvider } from '@/context/LanguageContext';
+import { DisplayModeProvider } from '@/context/DisplayModeContext';
 import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
 import CustomCursor from '@/components/ui/CustomCursor';
 import IntroLoader from '@/components/ui/IntroLoader';
+import DisplayModeToast from '@/components/ui/DisplayModeToast';
 
 const playfair = Playfair_Display({
   subsets: ['latin', 'vietnamese'],
@@ -44,13 +46,16 @@ export default function RootLayout({
     <html lang="vi" className={`${playfair.variable} ${inter.variable}`}>
       <body className="font-body bg-ivory text-charcoal antialiased selection:bg-navy selection:text-white">
         <LanguageProvider>
-          <SmoothScrollProvider>
-            <IntroLoader />
-            <CustomCursor />
-            <Navbar />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-          </SmoothScrollProvider>
+          <DisplayModeProvider>
+            <SmoothScrollProvider>
+              <IntroLoader />
+              <CustomCursor />
+              <DisplayModeToast />
+              <Navbar />
+              <main className="min-h-screen">{children}</main>
+              <Footer />
+            </SmoothScrollProvider>
+          </DisplayModeProvider>
         </LanguageProvider>
       </body>
     </html>

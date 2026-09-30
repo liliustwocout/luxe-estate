@@ -1,4 +1,5 @@
 import Scene3D from '@/components/3d/Scene3D';
+import DisplayModeToggle from '@/components/ui/DisplayModeToggle';
 import Hero from '@/components/home/Hero';
 import SearchBar from '@/components/home/SearchBar';
 import FeaturedShowcase from '@/components/home/FeaturedShowcase';
@@ -9,8 +10,11 @@ import CTASection from '@/components/home/CTASection';
 export default function HomePage() {
   return (
     <>
-      {/* Interactive 3D architectural background */}
+      {/* Interactive 3D architectural background (switches between Ultra 3D WebGL and Lite Zero-GPU) */}
       <Scene3D />
+
+      {/* Floating 3D / Performance HUD Controller */}
+      <DisplayModeToggle variant="floating" />
 
       {/* Hero section with cinematic typography and dual rental CTAs */}
       <Hero />
